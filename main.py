@@ -11,9 +11,6 @@ intents = discord.Intents.default()
 intents.message_content = True
 intents.messages = True
 
-barndles = 266000735454363649
-slime = 496765197575520270
-
 token = str(os.getenv("TOKEN"))
 
 maps = ["1a", "2a", "3a", "4a", "5a", "6a", "7a", "8a", "farewell", "cosmic column", "sentient forest", "pumber", "java's crypt", "the tower (XVI)", "starlight station", "mango mesa", "flying battery", "the core problem", "hydroshock", "subway neon", "meaningless contraptions", "golden alleyway", "system.invalidmapexception", "skyline usurper", "clockwork", "plasma reactor", "floating point", "psychokinetic", "ivory", "sex", "solar express", "nelumbo", "heart of the storm", "ultra difficult", "glyph", "flavors of pi", "cryoshock", "chromatic complex", "fractured iridescence", "ngmhs", "7d1d", "mauve", "solaris", "madeline votes in the US presidential election", "ufo nest", "waterbear mountain", "run for freedom", "d1d7", "cpvl", "lxvi", "sapphire dash", "vivid abyss", "avian ascension", "magnetic dawn", "Mature Grape+", "5b garbage version", "cycle madness garbage version", "Darkmoon Ruins", "summit down-side"] 
@@ -42,11 +39,9 @@ async def glueidea(ctx):
 #send random glue pic
 @bot.slash_command(name="glue", description = "glue")
 async def glue(ctx):
-    #pic = random.choice(os.listdir("/home/barndles/Documents/discord-bots/mediafool/glue-pics"))
     pic = random.choice(os.listdir('/home/mediafool.py/mediafool.py/glue-pics/'))
 
     await ctx.respond("heres a glue!!!!!!!")
-    #await ctx.send(file=discord.File("/home/barndles/Documents/discord-bots/mediafool/glue-pics/"+ pic))
     await ctx.send(file=discord.File('/home/mediafool.py/mediafool.py/glue-pics/'+ pic))
     
 @bot.slash_command(name="percy", description = "percy")
