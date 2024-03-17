@@ -52,7 +52,7 @@ async def mapidea(ctx):
         await ctx.respond("map idea: ")
         await ctx.send(file=discord.File('./pumber.png'))
 
-    elif random.randint(0,10):
+    elif random.randint(0,10) == 1:
         await ctx.respond("map idea: " + random_map() + " but " + random_descriptor() + " and " + random_descriptor())
     else:
         await ctx.respond("map idea: " + random_map() + " but " + random_descriptor())
