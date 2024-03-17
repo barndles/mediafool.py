@@ -83,6 +83,26 @@ async def percy(ctx):
 
     await ctx.respond("heres a percy!!")
     await ctx.send(file=discord.File("/home/mediafool.py/mediafool.py/percy-pics/"+ pic))
+
+@bot.slash_command(name="meow", description = "meow")
+async def meow(ctx):
+    meow = np.random.randint(1,10)
+    match meow:
+        case 1: await ctx.respond("meow")
+        case 2: await ctx.respond("meow")
+        case 3: await ctx.respond("mrrow")
+        case 4: await ctx.respond("mow")
+        case 5: await ctx.respond("maaaoourr")
+        case 6: await ctx.respond("mmm")
+        case 7: await ctx.respond("mowwow")
+        case 8: await ctx.respond("mrr")
+        case 9: await ctx.respond("18567 S Garland St, Boise, Idaho, United States")
+        case _: await ctx.respond("mrrp")
+
+@bot.slash_command(description = "nya")
+async def nya(ctx):
+    await ctx.respond("nya")
+
 bot.run(token)
 
 
