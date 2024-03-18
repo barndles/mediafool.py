@@ -1,5 +1,4 @@
 import discord
-
 from discord.ext import commands
 import os
 import random
@@ -89,18 +88,16 @@ async def percy(ctx):
 
 @bot.slash_command(name="meow", description = "meow")
 async def meow(ctx):
-    meow = np.random.randint(1,10)
-    match meow:
-        case 1: await ctx.respond("meow")
-        case 2: await ctx.respond("meow")
-        case 3: await ctx.respond("mrrow")
-        case 4: await ctx.respond("mow")
-        case 5: await ctx.respond("maaaoourr")
-        case 6: await ctx.respond("mmm")
-        case 7: await ctx.respond("mowwow")
-        case 8: await ctx.respond("mrr")
-        case 9: await ctx.respond("18567 S Garland St, Boise, Idaho, United States")
-        case _: await ctx.respond("mrrp")
+    meow = "m"
+    meow_letters = ['m','m','r','r','e','e','e','e','o','o','o','o','i','i','w','i','u']
+    meow_lengths = [2,3,3,3,3,4,4,4,4,4,4,4,4,5,5,5,5,5,6,6,7,13]
+    meow_length = random.choice(meow_lengths)
+
+    for x in range(0,meow_length):
+        meow += random.choice(meow_letters)
+
+    await ctx.respond(meow)
+
 
 @bot.slash_command(description = "nya")
 async def nya(ctx):
@@ -134,5 +131,3 @@ async def explain(ctx, thing: str, game: str):
         await ctx.respond("This command failed 😔", ephemeral=True)
 
 bot.run(token)
-
-
