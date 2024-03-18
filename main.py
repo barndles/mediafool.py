@@ -35,7 +35,6 @@ def random_descriptor():
             break
     return descriptor
 
-
 load_sheet()
 
 bot = commands.Bot()
@@ -51,7 +50,6 @@ token = str(os.getenv("TOKEN"))
 async def on_ready():
     print(f"WE'RE LOGGED IN BOYS")
 
-
 @bot.slash_command(name="mapidea", description = "generate a fun new map idea!!!!!!!!")
 async def mapidea(ctx):
     
@@ -65,7 +63,6 @@ async def mapidea(ctx):
         await ctx.respond("map idea: " + random_map() + " but " + random_descriptor())
     
     load_sheet()
-
 
 @bot.slash_command(name="glueidea", description = "generate a fun new glue idea!!!!!!!!")
 async def glueidea(ctx):
@@ -129,5 +126,16 @@ async def explain(ctx, thing: str, game: str):
         await ctx.respond(f"Q: Explain \"{thing}\" from \"{game}\". \nA: {completion.choices[0].message.content} {citation}")
     except:
         await ctx.respond("This command failed 😔", ephemeral=True)
+
+@bot.slash_command(name="resource", description = "gives a link to the requested Celeste resource")
+@discord.option(name="resource", description="the thing that you want a link to. (ex: hist, fwg spreadsheet, fwg collectors, modded golden list)")
+async def resource(ctx, resource: str):
+    match resource:
+        case 'hist' | 'hard list' | 'hardlist': await ctx.respond("https://docs.google.com/spreadsheets/d/1A88F3X2lOQJry-Da2NpnAr-w5WDrkjDtg7Wt0kLCiz8")
+        case 'leaderboard': await ctx.respond("https://www.speedrun.com/celeste")
+        case 'gist' | 'garden list': await ctx.respond("https://docs.google.com/spreadsheets/d/1VVIcfkpQsRYQsNmUeM1Uti2G0En6ba6o2cXrGoE-bKM")
+        case 'fwg spreadsheet' | 'spreadsheet' | 'strats': await ctx.respond("https://docs.google.com/spreadsheets/d/1VVIcfkpQsRYQsNmUeM1Uti2G0En6ba6o2cXrGoE-bKM")
+        case 'fwg collectors' | 'graduate list': await ctx.respond("https://docs.google.com/spreadsheets/d/1FesTb6qkgMz-dCn7YdioRydToWSQNTg1axFEIHU4FF8")
+        case 'modded golden list' | 'tierlist' | 'mod list': await ctx.respond("https://docs.google.com/spreadsheets/d/1v0yhceinMGr5alNekOxEkYCxXcYUsbtzMRVMezxbcVY/edit")
 
 bot.run(token)
