@@ -6,6 +6,7 @@ import random
 import numpy as np
 from openpyxl import load_workbook
 import requests as rs
+from openai import OpenAI
 
 def load_sheet():
     xlsx_url="https://docs.google.com/spreadsheets/d/1WCC6GrLwaDmcQtINrCU2SEmjKpBJcWqX5AWDenl4hvY/export?format=xlsx&id=1WCC6GrLwaDmcQtINrCU2SEmjKpBJcWqX5AWDenl4hvY"
@@ -42,6 +43,8 @@ bot = commands.Bot()
 intents = discord.Intents.default()
 intents.message_content = True
 intents.messages = True
+
+gpt = OpenAI(api_key="none", base_url="https://forward.free-chat.asia/v1")
 
 token = str(os.getenv("TOKEN"))
 
@@ -102,6 +105,30 @@ async def meow(ctx):
 @bot.slash_command(description = "nya")
 async def nya(ctx):
     await ctx.respond("nya")
+
+@bot.slash_command(name="explain", description = "Explains \"tech\" in \"video games\"")
+@discord.option("thing", description="Thing you want explained")
+@discord.option("game", description="Game name")
+async def explain(ctx, thing: str, game: str):
+    if len(thing)>100 or len(game)>100:
+        await ctx.respond("Please keep your queries under 100 characters", ephemeral=True)
+        return
+    completion = gpt.chat.completions.create(
+      model="gpt-3.5-turbo",
+      messages=[
+        {"role": "system", "content": "You are an assistant whose primary purppose is to explain mechanics in video games. Try to respond with very varied explanations, even if they are incorrect."},
+        {"role": "user", "content": f"Can you explpain what a {thing} is in {game}"}
+      ]
+    )
+    randomname = np.random.randint(0,30)
+    citation = ""
+    match randomname:
+        case 5: citation = "[Source: <:percy:1146429763687288965>]"
+        case 10: citation = "[citation needed]"
+        case 15: citation = "[Source: _cnn.com_]"
+        case 20: citation = "[Source: _mediafool_]"
+        case 25: citation = f"[Source: _{game.replace(' ', '')}.com_]"
+    await ctx.respond(f"Q: Explain \"{thing}\" from \"{game}\". \nA: {completion.choices[0].message.content} {citation}")
 
 bot.run(token)
 
