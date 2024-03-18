@@ -127,15 +127,16 @@ async def explain(ctx, thing: str, game: str):
     except:
         await ctx.respond("This command failed 😔", ephemeral=True)
 
-@bot.slash_command(name="resource", description = "gives a link to the requested Celeste resource")
+@bot.slash_command(name="resource", description = "gives a link to the requested Celeste resource. ex: hist, fwg spreadsheet, etc")
 @discord.option(name="resource", description="the thing that you want a link to. (ex: hist, fwg spreadsheet, fwg collectors, modded golden list)")
 async def resource(ctx, resource: str):
     match resource:
         case 'hist' | 'hard list' | 'hardlist': await ctx.respond("https://docs.google.com/spreadsheets/d/1A88F3X2lOQJry-Da2NpnAr-w5WDrkjDtg7Wt0kLCiz8")
         case 'leaderboard': await ctx.respond("https://www.speedrun.com/celeste")
         case 'gist' | 'garden list': await ctx.respond("https://docs.google.com/spreadsheets/d/1VVIcfkpQsRYQsNmUeM1Uti2G0En6ba6o2cXrGoE-bKM")
-        case 'fwg spreadsheet' | 'spreadsheet' | 'strats': await ctx.respond("https://docs.google.com/spreadsheets/d/1VVIcfkpQsRYQsNmUeM1Uti2G0En6ba6o2cXrGoE-bKM")
+        case 'fwg spreadsheet' | 'spreadsheet' | 'strats' | 'stratsheet': await ctx.respond("https://docs.google.com/spreadsheets/d/1HrSBQKw-L1onD2uz5lSlt6NADftpys2au5V7lf79OrM/edit?usp=sharing")
         case 'fwg collectors' | 'graduate list': await ctx.respond("https://docs.google.com/spreadsheets/d/1FesTb6qkgMz-dCn7YdioRydToWSQNTg1axFEIHU4FF8")
         case 'modded golden list' | 'tierlist' | 'mod list': await ctx.respond("https://docs.google.com/spreadsheets/d/1v0yhceinMGr5alNekOxEkYCxXcYUsbtzMRVMezxbcVY/edit")
+        case _: await ctx.respond("Please provide a valid resource. ex: hist, fwg spreadsheet, fwg collectors, modded golden list, stratsheet")
 
 bot.run(token)
