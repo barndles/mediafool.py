@@ -86,9 +86,16 @@ async def percy(ctx):
 
 @bot.slash_command(name="meow", description = "meow")
 async def meow(ctx):
-    meows = ['meow','mrow','moww','mmr','maou','miau','mrow','mwow','mwow','mrrp','mmmmmoruar','maarauraur','mowow','bark']
-    meow = random.randint(0,len(meows)-1)
-    await ctx.respond(meows[meow])
+    meow = "m"
+    meow_letters = ['m','m','r','r','e','e','e','e','o','o','o','o','i','i','w','i','u']
+    meow_lengths = [2,3,3,3,3,4,4,4,4,4,4,4,4,5,5,5,5,5,6,6,7,13]
+    meow_length = random.choice(meow_lengths)
+
+    for x in range(0,meow_length):
+        meow += random.choice(meow_letters)
+
+    await ctx.respond(meow)
+
 
 @bot.slash_command(description = "nya")
 async def nya(ctx):
