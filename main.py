@@ -83,6 +83,13 @@ async def percy(ctx):
     await ctx.respond("heres a percy!!")
     await ctx.send(file=discord.File("/home/mediafool.py/mediafool.py/percy-pics/"+ pic))
 
+@bot.slash_command(name="buffy", description = "buffy")
+async def buffy(ctx):
+    pic = random.choice(os.listdir("/home/mediafool.py/mediafool.py/buffy-pics/"))
+
+    await ctx.respond("heres a buffy!!")
+    await ctx.send(file=discord.File("/home/mediafool.py/mediafool.py/buffy-pics/"+ pic))
+
 @bot.slash_command(name="meow", description = "meow")
 async def meow(ctx):
     meow = "m"
@@ -138,5 +145,7 @@ async def resource(ctx, resource: str):
         case 'fwg collectors' | 'graduate list': await ctx.respond("https://docs.google.com/spreadsheets/d/1FesTb6qkgMz-dCn7YdioRydToWSQNTg1axFEIHU4FF8")
         case 'modded golden list' | 'tierlist' | 'mod list': await ctx.respond("https://docs.google.com/spreadsheets/d/1v0yhceinMGr5alNekOxEkYCxXcYUsbtzMRVMezxbcVY/edit")
         case _: await ctx.respond("Please provide a valid resource. ex: hist, fwg spreadsheet, fwg collectors, modded golden list, stratsheet")
+
+    
 
 bot.run(token)
