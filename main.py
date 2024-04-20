@@ -7,17 +7,19 @@ from openpyxl import load_workbook
 import requests as rs
 from openai import OpenAI
 
-def load_sheet():
-    xlsx_url="https://docs.google.com/spreadsheets/d/1WCC6GrLwaDmcQtINrCU2SEmjKpBJcWqX5AWDenl4hvY/export?format=xlsx&id=1WCC6GrLwaDmcQtINrCU2SEmjKpBJcWqX5AWDenl4hvY"
+mapIdeaURL = "https://docs.google.com/spreadsheets/d/1WCC6GrLwaDmcQtINrCU2SEmjKpBJcWqX5AWDenl4hvY/export?format=xlsx&id=1WCC6GrLwaDmcQtINrCU2SEmjKpBJcWqX5AWDenl4hvY"
 
-    res = rs.get(url=xlsx_url)
+def load_sheet(url):
+    url=mapIdeaURL
+
+    res = rs.get(url=url)
     open('maps_and_descriptors.xlsx', 'wb+').write(res.content)
 
     wb = load_workbook(filename="maps_and_descriptors.xlsx")
     sheet = wb.active
     return sheet
 def random_map():
-    sheet = load_sheet()
+    sheet = load_sheet(mapIdeaURL)
     maps = sheet['A']
     map = None # Pick a random map, if it's "None", Try again
     while map == None:
@@ -26,7 +28,7 @@ def random_map():
             break
     return map
 def random_descriptor():
-    sheet = load_sheet()
+    sheet = load_sheet(mapIdeaURL)
     descriptors = sheet['B']
     descriptor = None # Pick a random map, if it's "None", Try again
     while descriptor == None:
@@ -35,7 +37,7 @@ def random_descriptor():
             break
     return descriptor
 
-load_sheet()
+load_sheet(mapIdeaURL)
 
 bot = commands.Bot()
 intents = discord.Intents.default()
@@ -62,7 +64,7 @@ async def mapidea(ctx):
     else:
         await ctx.respond("map idea: " + random_map() + " but " + random_descriptor())
     
-    load_sheet()
+    load_sheet(mapIdeaURL)
 
 @bot.slash_command(name="glueidea", description = "generate a fun new glue idea!!!!!!!!")
 async def glueidea(ctx):
@@ -89,6 +91,20 @@ async def buffy(ctx):
 
     await ctx.respond("heres a buffy!!")
     await ctx.send(file=discord.File("/home/mediafool.py/mediafool.py/buffy-pics/"+ pic))
+
+@bot.slash_command(name="niña", description = "niña")
+async def niña(ctx):
+    pic = random.choice(os.listdir("/home/mediafool.py/mediafool.py/nina-pics/"))
+
+    await ctx.respond("heres a niña!!")
+    await ctx.send(file=discord.File("/home/mediafool.py/mediafool.py/nina-pics/"+ pic))
+
+@bot.slash_command(name="snoopy", description = "snoopy")
+async def niña(ctx):
+    pic = random.choice(os.listdir("/home/mediafool.py/mediafool.py/snoopy-pics/"))
+
+    await ctx.respond("heres a snoopy!!")
+    await ctx.send(file=discord.File("/home/mediafool.py/mediafool.py/snoopy-pics/"+ pic))
 
 @bot.slash_command(name="meow", description = "meow")
 async def meow(ctx):
