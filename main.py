@@ -6,8 +6,10 @@ import numpy as np
 from openpyxl import load_workbook
 import requests as rs
 from openai import OpenAI
+import json
 
-mapIdeaURL = "https://docs.google.com/spreadsheets/d/1WCC6GrLwaDmcQtINrCU2SEmjKpBJcWqX5AWDenl4hvY/export?format=xlsx&id=1WCC6GrLwaDmcQtINrCU2SEmjKpBJcWqX5AWDenl4hvY"
+mapIdeaURL = str(os.getenv("URL"))
+#"https://docs.google.com/spreadsheets/d/1WCC6GrLwaDmcQtINrCU2SEmjKpBJcWqX5AWDenl4hvY/export?format=xlsx&id=1WCC6GrLwaDmcQtINrCU2SEmjKpBJcWqX5AWDenl4hvY"
 
 def load_sheet(url):
     url=mapIdeaURL
@@ -39,6 +41,8 @@ def random_descriptor():
 
 load_sheet(mapIdeaURL)
 
+catgirl = 266000735454363649
+
 bot = commands.Bot()
 intents = discord.Intents.default()
 intents.message_content = True
@@ -47,6 +51,19 @@ intents.messages = True
 gpt = OpenAI(api_key="none", base_url="https://forward.free-chat.asia/v1")
 
 token = str(os.getenv("TOKEN"))
+
+@bot.event
+async def on_message(self, message):
+    if message.author.id == self.user.id:
+        return
+    
+    if message.author.id == catgirl:
+        if message.guild.id == 850181145709510706:
+            await message.channel.send(message.message)
+            await message.channel.send("nya")
+
+
+
 
 @bot.event
 async def on_ready():
@@ -66,10 +83,13 @@ async def mapidea(ctx):
     
     load_sheet(mapIdeaURL)
 
+
 @bot.slash_command(name="glueidea", description = "generate a fun new glue idea!!!!!!!!")
 async def glueidea(ctx):
     await ctx.respond("glue idea: glue" + " but " + random_descriptor())
 
+
+# SEND PHOTOS OF CATS -------------------------------------------------------------------- #
 #send random glue pic
 @bot.slash_command(name="glue", description = "glue")
 async def glue(ctx):
@@ -100,11 +120,13 @@ async def niña(ctx):
     await ctx.send(file=discord.File("/home/mediafool.py/mediafool.py/nina-pics/"+ pic))
 
 @bot.slash_command(name="snoopy", description = "snoopy")
-async def niña(ctx):
+async def snoopy(ctx):
     pic = random.choice(os.listdir("/home/mediafool.py/mediafool.py/snoopy-pics/"))
 
     await ctx.respond("heres a snoopy!!")
     await ctx.send(file=discord.File("/home/mediafool.py/mediafool.py/snoopy-pics/"+ pic))
+
+# SEND PHOTOS OF CATS -------------------------------------------------------------------- #
 
 @bot.slash_command(name="meow", description = "meow")
 async def meow(ctx):
