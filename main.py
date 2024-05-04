@@ -9,7 +9,6 @@ from openai import OpenAI
 import json
 
 mapIdeaURL = str(os.getenv("URL"))
-#"https://docs.google.com/spreadsheets/d/1WCC6GrLwaDmcQtINrCU2SEmjKpBJcWqX5AWDenl4hvY/export?format=xlsx&id=1WCC6GrLwaDmcQtINrCU2SEmjKpBJcWqX5AWDenl4hvY"
 
 def load_sheet(url):
     url=mapIdeaURL
