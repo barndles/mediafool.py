@@ -5,10 +5,12 @@ import random
 import numpy as np
 from openpyxl import load_workbook
 import requests as rs
-from openai import OpenAI
+#from openai import OpenAI
 import json
 
 mapIdeaURL = str(os.getenv("URL"))
+
+dir = '/home/barndles/mediafool/mediafool/mediafool.py'
 
 def load_sheet(url):
     url=mapIdeaURL
@@ -47,7 +49,7 @@ intents = discord.Intents.default()
 intents.message_content = True
 intents.messages = True
 
-gpt = OpenAI(api_key="none", base_url="https://forward.free-chat.asia/v1")
+#gpt = OpenAI(api_key="none", base_url="https://forward.free-chat.asia/v1")
 
 token = str(os.getenv("TOKEN"))
 
@@ -92,38 +94,45 @@ async def glueidea(ctx):
 #send random glue pic
 @bot.slash_command(name="glue", description = "glue")
 async def glue(ctx):
-    pic = random.choice(os.listdir('/home/mediafool.py/mediafool.py/glue-pics/'))
+    pic = random.choice(os.listdir(dir + '/glue-pics/'))
 
     await ctx.respond("heres a glue!!!!!!!")
-    await ctx.send(file=discord.File('/home/mediafool.py/mediafool.py/glue-pics/'+ pic))
+    await ctx.send(file=discord.File(dir + '/glue-pics/'+ pic))
     
 @bot.slash_command(name="percy", description = "percy")
 async def percy(ctx):
-    pic = random.choice(os.listdir("/home/mediafool.py/mediafool.py/percy-pics/"))
+    pic = random.choice(os.listdir(dir + "/percy-pics/"))
 
     await ctx.respond("heres a percy!!")
-    await ctx.send(file=discord.File("/home/mediafool.py/mediafool.py/percy-pics/"+ pic))
+    await ctx.send(file=discord.File(dir +"/percy-pics/"+ pic))
 
 @bot.slash_command(name="buffy", description = "buffy")
 async def buffy(ctx):
-    pic = random.choice(os.listdir("/home/mediafool.py/mediafool.py/buffy-pics/"))
+    pic = random.choice(os.listdir(dir +"/buffy-pics/"))
 
     await ctx.respond("heres a buffy!!")
-    await ctx.send(file=discord.File("/home/mediafool.py/mediafool.py/buffy-pics/"+ pic))
+    await ctx.send(file=discord.File(dir +"/buffy-pics/"+ pic))
 
 @bot.slash_command(name="niña", description = "niña")
 async def niña(ctx):
-    pic = random.choice(os.listdir("/home/mediafool.py/mediafool.py/nina-pics/"))
+    pic = random.choice(os.listdir(dir +"/nina-pics/"))
 
     await ctx.respond("heres a niña!!")
-    await ctx.send(file=discord.File("/home/mediafool.py/mediafool.py/nina-pics/"+ pic))
+    await ctx.send(file=discord.File(dir +"/nina-pics/"+ pic))
 
 @bot.slash_command(name="snoopy", description = "snoopy")
 async def snoopy(ctx):
-    pic = random.choice(os.listdir("/home/mediafool.py/mediafool.py/snoopy-pics/"))
+    pic = random.choice(os.listdir(dir +"/snoopy-pics/"))
 
     await ctx.respond("heres a snoopy!!")
-    await ctx.send(file=discord.File("/home/mediafool.py/mediafool.py/snoopy-pics/"+ pic))
+    await ctx.send(file=discord.File(dir + "/snoopy-pics/"+ pic))
+
+@bot.slash_command(name="callie", description = "callie")
+async def callie(ctx):
+    pic = random.choice(os.listdir(dir +"/callie-pics/"))
+
+    await ctx.respond("heres a callie!!")
+    await ctx.send(file=discord.File(dir + "/callie-pics/"+ pic))
 
 # SEND PHOTOS OF CATS -------------------------------------------------------------------- #
 
@@ -144,7 +153,7 @@ async def meow(ctx):
 async def nya(ctx):
     await ctx.respond("nya")
 
-@bot.slash_command(name="explain", description = "Explains \"tech\" in \"video games\"")
+'''@bot.slash_command(name="explain", description = "Explains \"tech\" in \"video games\"")
 @discord.option("thing", description="Thing you want explained")
 @discord.option("game", description="Game name")
 async def explain(ctx, thing: str, game: str):
@@ -170,7 +179,7 @@ async def explain(ctx, thing: str, game: str):
         await ctx.respond(f"Q: Explain \"{thing}\" from \"{game}\". \nA: {completion.choices[0].message.content} {citation}")
     except:
         await ctx.respond("This command failed 😔", ephemeral=True)
-
+'''
 @bot.slash_command(name="resource", description = "gives a link to the requested Celeste resource. ex: hist, fwg spreadsheet, etc")
 @discord.option(name="resource", description="the thing that you want a link to. (ex: hist, fwg spreadsheet, fwg collectors, modded golden list)")
 async def resource(ctx, resource: str):
